@@ -1,7 +1,8 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import dynamic from 'next/dynamic';
+import { ThemeToggle } from '@/app/components/ThemeToggle/ThemeToogle';
 
 export const metadata: Metadata = {
   title: 'Calculator App',
@@ -15,7 +16,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <DynamicThemeRegistry>{children}</DynamicThemeRegistry>
+        <DynamicThemeRegistry>
+          <ThemeToggle />
+          {children}
+        </DynamicThemeRegistry>
       </body>
     </html>
   );
