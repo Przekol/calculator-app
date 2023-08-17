@@ -1,9 +1,8 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Roboto } from 'next/font/google';
-import { ReactNode } from 'react';
-
-const roboto = Roboto({ style: 'normal', weight: '400', subsets: ['latin'] });
+import React, { ReactNode } from 'react';
+import dynamic from 'next/dynamic';
+import { ThemeToggle } from '@/app/components/ThemeToggle/ThemeToogle';
 
 export const metadata: Metadata = {
   title: 'Calculator App',
@@ -11,9 +10,17 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
+  const DynamicThemeRegistry = dynamic(() => import('@/app/context/ThemeContext/ThemeRegistry'), {
+    ssr: false,
+  });
   return (
     <html lang="en">
-      <body className={roboto.className}>{children}</body>
+      <body>
+        <DynamicThemeRegistry>
+          <ThemeToggle />
+          {children}
+        </DynamicThemeRegistry>
+      </body>
     </html>
   );
 }
