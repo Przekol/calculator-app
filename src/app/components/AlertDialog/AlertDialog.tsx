@@ -11,12 +11,14 @@ export default function AlertDialog({ open, onClose, message, ...rest }: AlertDi
   return (
     <Dialog open={open} onClose={onClose}>
       <Alert
+        variant="outlined"
         {...rest}
         action={
           <Button color={rest.severity} size="small" onClick={onClose}>
             OK
           </Button>
         }
+        sx={{ padding: 2 }}
       >
         {message}
       </Alert>
