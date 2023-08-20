@@ -16,7 +16,6 @@ export default function PrivateLayout({ children }: { children: React.ReactNode 
             padding: 2,
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: 'red',
           }}
         >
           {children}
