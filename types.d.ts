@@ -13,3 +13,5 @@ type CalculationData = {
   operation: Operation;
   result: number;
 };
+
+type OperationData = Omit<CalculationData, 'result'>;
