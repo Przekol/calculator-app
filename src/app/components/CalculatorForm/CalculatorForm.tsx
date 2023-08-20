@@ -5,7 +5,7 @@ import OperationButton, { Operation } from '@/app/components/buttons/OperationBu
 import AlertDialog from '@/app/components/AlertDialog/AlertDialog';
 import React from 'react';
 import { useAuthUser } from '@/app/hooks/useAuthUser';
-import { CalculationData } from '../../../../types';
+import { AlertData, CalculationData } from '../../../../types';
 import { saveCalculationData } from '@/app/services/saveCalculationData';
 import { calculateResult } from '@/app/utils/calculations';
 
@@ -18,15 +18,25 @@ export default function CalculatorForm() {
     result: 0,
   });
   const [openAlert, setOpenAlert] = React.useState(false);
+  const [alert, setAlert] = React.useState<AlertData>({ message: '', severity: 'warning' });
 
   const buttonOperations = Object.values(Operation).map(operation => ({ operation }));
 
-  const handleOpenAlert = () => {
+  const handleOpenAlert = (alertData: AlertData) => {
+    setAlert(prevState => ({
+      ...prevState,
+      message: alertData.message,
+      severity: alertData.severity,
+    }));
     setOpenAlert(true);
   };
 
   const handleCloseAlert = () => {
     setOpenAlert(false);
+    setAlert(prevState => ({
+      ...prevState,
+      message: '',
+    }));
   };
 
   const updateForm = (key: string, value: string | number) => {
@@ -48,6 +58,14 @@ export default function CalculatorForm() {
     const num1 = form.num1;
     const num2 = form.num2;
 
+    if (num1 === 0 && num2 === 0) {
+      handleOpenAlert({
+        message: 'Please, enter at least one number.',
+        severity: 'info',
+      });
+      return;
+    }
+
     try {
       const result = calculateResult({ num1, num2, operation });
       updateForm('result', result);
@@ -64,7 +82,10 @@ export default function CalculatorForm() {
       clearForm();
     } catch (error: any) {
       if (error.message === 'Division by zero is not allowed.') {
-        handleOpenAlert();
+        handleOpenAlert({
+          message: 'Division by zero is not allowed.',
+          severity: 'error',
+        });
       } else {
         console.error('An error occurred:', error);
       }
@@ -119,8 +140,8 @@ export default function CalculatorForm() {
       <AlertDialog
         open={openAlert}
         onClose={handleCloseAlert}
-        message={'Division by zero is not allowed.'}
-        severity="warning"
+        message={alert.message}
+        severity={alert.severity}
       />
     </Grid>
   );
