@@ -10,8 +10,8 @@ type NavItem = {
 };
 
 type CalculationData = {
-  num1: number;
-  num2: number;
+  num1: number | null;
+  num2: number | null;
   operation: Operation;
   result: number;
 };
