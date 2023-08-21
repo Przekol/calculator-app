@@ -26,10 +26,11 @@ export const copyCalculationToCommunication = functions
     const calculationData = snapshot.data();
 
     const communicationDocRef = admin.firestore()
-      .collection("communication").doc(calculationId);
+      .collection("communication").doc();
 
     await communicationDocRef.set({
       userId: userUid,
+      calculationId: calculationId,
       ...calculationData,
     });
 
