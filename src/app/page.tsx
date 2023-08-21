@@ -1,5 +1,6 @@
-import AuthGuardRouteRedirect from './components/PrivateRoute/AuthGuardRouteRedirect';
+import RouteRedirect from '@/app/components/PrivateRoute/RouteRedirect';
+import React from 'react';
 
 export default function Home() {
-  return <AuthGuardRouteRedirect />;
+  return <RouteRedirect />;
 }

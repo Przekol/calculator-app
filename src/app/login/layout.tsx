@@ -4,8 +4,8 @@ import { ThemeToggle } from '@/app/components/ThemeToggle/ThemeToogle';
 import { Box } from '@mui/material';
 
 export const metadata: Metadata = {
-  title: 'EpicChat - Login',
-  description: 'EpicChat - Login Page',
+  title: 'Calculator App - Login',
+  description: 'Calculator App - Login Page',
 };
 
 export default function LoginLayout({ children }: { children: React.ReactNode }) {
