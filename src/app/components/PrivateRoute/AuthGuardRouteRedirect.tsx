@@ -9,12 +9,13 @@ export default function AuthGuardRouteRedirect() {
   const router = useRouter();
 
   React.useEffect(() => {
-    if (!loading) {
-      if (user) {
-        router.push('/dashboard');
-      } else {
-        router.push('/login');
-      }
+    if (!loading && !user) {
+      router.push('/login');
+    }
+    if (user) {
+      router.push('/dashboard');
+    } else {
+      router.push('/login');
     }
   }, [router, user, loading]);
 

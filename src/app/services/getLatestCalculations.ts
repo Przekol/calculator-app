@@ -13,7 +13,7 @@ const getLatestCalculations = async (
   return onSnapshot(q, snapshot => {
     const data = snapshot.docs.map(doc => ({
       ...(doc.data() as CalculationData),
-      id: doc.id,
+      calculationId: doc.id,
       time: doc.data().time as string,
       timestamp: doc.data().timestamp,
     }));

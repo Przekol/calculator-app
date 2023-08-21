@@ -24,11 +24,16 @@ type AlertData = {
 };
 
 type CalculationResult = CalculationData & {
-  id: string;
+  calculationId: string;
   time: string;
   timestamp: Timestamp;
 };
 
 type GetCalculationsOptions = {
   limit?: number;
+};
+
+type CommunicationCalculation = CalculationResult & {
+  communicationId: string;
+  userId: string;
 };
