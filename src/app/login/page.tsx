@@ -1,14 +1,23 @@
+'use client';
 import React from 'react';
 import { Container, Paper, Typography } from '@mui/material';
 import CalculateIcon from '@mui/icons-material/Calculate';
 
-import AuthGuardRouteRedirect from '@/app/components/PrivateRoute/AuthGuardRouteRedirect';
 import LoginButton from '@/app/components/buttons/LoginButton';
+import { useRouter } from 'next/navigation';
+import { useAuthUser } from '@/app/hooks/useAuthUser';
 
 export default function LoginPage() {
+  const router = useRouter();
+  const { user, loading } = useAuthUser();
+  React.useEffect(() => {
+    if (user) {
+      router.push('/dashboard');
+    }
+  }, [loading]);
+
   return (
     <>
-      <AuthGuardRouteRedirect />
       <Container
         sx={{
           display: 'flex',

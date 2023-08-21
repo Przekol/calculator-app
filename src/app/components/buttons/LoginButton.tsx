@@ -3,12 +3,14 @@ import GoogleIcon from '@mui/icons-material/Google';
 import { Button } from '@mui/material';
 import React from 'react';
 import { useAuthActions } from '@/app/hooks/useAuthActions';
+import { useRouter } from 'next/navigation';
 
 export default function LoginButton() {
   const { signInWithGoogle } = useAuthActions();
-
+  const router = useRouter();
   async function handleSignInWithGoogle(): Promise<void> {
     await signInWithGoogle();
+    return router.push('/dashboard');
   }
   return (
     <Button

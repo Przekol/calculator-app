@@ -56,7 +56,7 @@ export function NavbarUserMenu() {
               gap: 10,
             }}
             onClick={handleSignOut}
-            href={'/'}
+            href={'/login'}
           >
             <ExitToApp /> | Logout
           </Link>
