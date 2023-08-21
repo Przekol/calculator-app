@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Paper, Typography } from '@mui/material';
-import CalculatorForm from '@/app/components/CalculationList/CalculationList';
+import CalculationUserList from '@/app/components/CalculationList/CalculationUserList';
 
 export default function DashboardPage() {
   return (
@@ -9,8 +9,7 @@ export default function DashboardPage() {
         <Typography variant="h4" sx={{ paddingBottom: 2, textAlign: 'center' }}>
           Your Latest Calculations
         </Typography>
-
-        <CalculatorForm />
+        <CalculationUserList />
       </Paper>
     </Grid>
   );
