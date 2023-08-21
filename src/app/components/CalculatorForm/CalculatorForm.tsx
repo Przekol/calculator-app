@@ -12,8 +12,8 @@ import { calculateResult } from '@/app/utils/calculations';
 export default function CalculatorForm() {
   const { user } = useAuthUser();
   const [form, setForm] = React.useState<CalculationData>({
-    num1: 0,
-    num2: 0,
+    num1: null,
+    num2: null,
     operation: Operation.ADD,
     result: 0,
   });
@@ -49,22 +49,14 @@ export default function CalculatorForm() {
   const clearForm = () => {
     setForm(prevState => ({
       ...prevState,
-      num1: 0,
-      num2: 0,
+      num1: null,
+      num2: null,
     }));
   };
 
   const handleOperation = async (operation: Operation) => {
     const num1 = form.num1;
     const num2 = form.num2;
-
-    if (num1 === 0 && num2 === 0) {
-      handleOpenAlert({
-        message: 'Please, enter at least one number.',
-        severity: 'info',
-      });
-      return;
-    }
 
     try {
       const result = calculateResult({ num1, num2, operation });
@@ -85,6 +77,11 @@ export default function CalculatorForm() {
         handleOpenAlert({
           message: 'Division by zero is not allowed.',
           severity: 'error',
+        });
+      } else if (error.message === 'Please enter valid numbers.') {
+        handleOpenAlert({
+          message: 'Please, enter at least one number.',
+          severity: 'info',
         });
       } else {
         console.error('An error occurred:', error);
