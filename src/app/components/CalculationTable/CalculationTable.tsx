@@ -1,21 +1,25 @@
 import React from 'react';
 import { Table, TableContainer } from '@mui/material';
-import { CalculationResult } from '../../../../types';
+import { CalculationResult, CommunicationCalculation } from '../../../../types';
 import CalculationHeader from '@/app/components/CalculationTable/CalculationHeader';
 import CalculationRows from '@/app/components/CalculationTable/CalculationRows';
 
 type CalculationTableProps = {
-  calculations: CalculationResult[];
+  calculations: CalculationResult[] | CommunicationCalculation[];
+  variant: 'all' | 'one';
 };
 
-export default function CalculationTable({ calculations }: CalculationTableProps) {
-  const headNames = ['Calculation', 'Result', 'Time'];
+export default function CalculationTable({ calculations, variant }: CalculationTableProps) {
+  const headNamesOne = ['Calculation', 'Result', 'Time'];
+  const headNamesAll = ['Calculation', 'Result', 'Time', 'User'];
+
+  const headNames = variant === 'one' ? headNamesOne : headNamesAll;
 
   return (
     <TableContainer sx={{ padding: 1, borderRadius: 5 }}>
       <Table>
         <CalculationHeader headNames={headNames} />
-        <CalculationRows calculations={calculations} />
+        <CalculationRows variant={variant} calculations={calculations} />
       </Table>
     </TableContainer>
   );
